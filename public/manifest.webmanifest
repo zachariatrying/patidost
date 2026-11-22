@@ -2,14 +2,14 @@
   "name": "PatiDost — Türkçe Öz-Bakım & Odaklanma Dostu",
   "short_name": "PatiDost",
   "description": "Suçluluk duygusu yaratmayan sevimli Türkçe öz-bakım, nefes egzersizi, odak sayacı ve ruh hali arkadaşı.",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#FFF9F2",
   "theme_color": "#366B51",
   "lang": "tr",
   "icons": [
     {
-      "src": "/store-assets/patidost_icon.png",
+      "src": "store-assets/patidost_icon.png",
       "sizes": "1024x1024",
       "type": "image/png"
     }
