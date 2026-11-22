@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/types.ts","./src/components/breathingwidget.tsx","./src/components/focuspomodoro.tsx","./src/components/microtaskspanel.tsx","./src/components/moodjournal.tsx","./src/components/petstage.tsx","./src/components/wardrobemodal.tsx","./src/data/catalog.ts","./src/utils/sound.ts","./src/utils/storycard.ts"],"version":"5.9.3"}
