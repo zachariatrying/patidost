@@ -96,6 +96,28 @@ export default function App() {
 
   useEffect(() => {
     try {
+      const sp = new URLSearchParams(window.location.search);
+      const utm_source = sp.get('utm_source');
+      const utm_campaign = sp.get('utm_campaign');
+      const utm_medium = sp.get('utm_medium');
+      if (utm_source || utm_campaign || utm_medium) {
+        localStorage.setItem(
+          'patidost_utm_attribution_v1',
+          JSON.stringify({
+            utm_source,
+            utm_campaign,
+            utm_medium,
+            landedAt: new Date().toISOString(),
+          })
+        );
+      }
+    } catch {
+      // Ignore storage errors
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {
       // Ignore quota errors
@@ -366,7 +388,7 @@ export default function App() {
       <header className="sticky top-0 z-30 border-b border-[#EDE3D7] bg-[#FFF9F2]/90 backdrop-blur-md">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <img src="/favicon.svg" alt="" className="w-8 h-8" />
+            <img src={`${import.meta.env.BASE_URL}store-assets/patidost_icon.png`} alt="PatiDost" className="w-8 h-8 rounded-lg object-cover" />
             <div>
               <span className="font-display text-lg font-bold tracking-tight text-[#2B2118]">
                 PatiDost
@@ -632,31 +654,28 @@ export default function App() {
             <div className="space-y-4">
               <div>
                 <span className="block text-xs font-semibold text-[#6B5849] mb-2">Tür Seçimi</span>
-                <div className="grid grid-cols-2 gap-2.5">
-                  <button
-                    type="button"
-                    onClick={() => handleSpeciesChange('cat')}
-                    className={`rounded-2xl border p-3.5 text-left transition-colors cursor-pointer ${
-                      state.species === 'cat'
-                        ? 'border-[#D45D3A] bg-[#FDF1EB]'
-                        : 'border-[#E8DDD0] bg-white'
-                    }`}
-                  >
-                    <div className="text-sm font-bold text-[#2B2118]">İstanbul Tekiri</div>
-                    <div className="text-xs text-[#6B5849] mt-0.5">Sıcakkanlı, meraklı kedi</div>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleSpeciesChange('bird')}
-                    className={`rounded-2xl border p-3.5 text-left transition-colors cursor-pointer ${
-                      state.species === 'bird'
-                        ? 'border-[#366B51] bg-[#EAF3EE]'
-                        : 'border-[#E8DDD0] bg-white'
-                    }`}
-                  >
-                    <div className="text-sm font-bold text-[#2B2118]">Neşeli Saka Kuşu</div>
-                    <div className="text-xs text-[#6B5849] mt-0.5">Hafif, sakin kanatlı dost</div>
-                  </button>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  {(
+                    [
+                      { id: 'cat', title: 'İstanbul Tekiri', desc: 'Sıcakkanlı, meraklı kedi', activeCls: 'border-[#D45D3A] bg-[#FDF1EB]' },
+                      { id: 'bird', title: 'Neşeli Saka Kuşu', desc: 'Hafif, sakin kanatlı dost', activeCls: 'border-[#366B51] bg-[#EAF3EE]' },
+                      { id: 'dog', title: 'Altın Köpek', desc: 'Sadık, neşeli yürüyüş arkadaşı', activeCls: 'border-[#C88A4B] bg-[#FEF6EB]' },
+                      { id: 'fox', title: 'Kızıl Tilki', desc: 'Zeki, sessiz odaklanma dostu', activeCls: 'border-[#D96B27] bg-[#FFF1E6]' },
+                      { id: 'bunny', title: 'Pamuk Tavşan', desc: 'Yumuşak, huzurlu dinlenme dostu', activeCls: 'border-[#D9778A] bg-[#FDF2F4]' },
+                    ] as const
+                  ).map((sp) => (
+                    <button
+                      key={sp.id}
+                      type="button"
+                      onClick={() => handleSpeciesChange(sp.id)}
+                      className={`rounded-2xl border p-3 text-left transition-colors cursor-pointer ${
+                        state.species === sp.id ? sp.activeCls : 'border-[#E8DDD0] bg-white'
+                      }`}
+                    >
+                      <div className="text-sm font-bold text-[#2B2118]">{sp.title}</div>
+                      <div className="text-[11px] text-[#6B5849] mt-0.5">{sp.desc}</div>
+                    </button>
+                  ))}
                 </div>
               </div>
 

@@ -70,6 +70,24 @@ export function MoodJournal({ entries, onSaveMood, onExportBackup }: MoodJournal
           })}
         </div>
 
+        <div className="flex flex-wrap gap-1.5 mb-2">
+          {[
+            'Bugün beni en çok ne yordu?',
+            'Şu an kendime neyi kolaylaştırabilirim?',
+            'Bugün küçük de olsa iyi giden ne vardı?',
+            'Zihnimde en çok dönen düşünce ne?',
+          ].map((prompt) => (
+            <button
+              key={prompt}
+              type="button"
+              onClick={() => setNote((prev) => (prev ? `${prev} ${prompt}` : prompt))}
+              className="rounded-full border border-[#E2D6C8] bg-[#FFF9F2] px-2.5 py-1 text-[11px] font-medium text-[#6B5849] hover:border-[#D45D3A] hover:text-[#2B2118] cursor-pointer"
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
+
         <div className="flex flex-col sm:flex-row gap-2">
           <input
             type="text"

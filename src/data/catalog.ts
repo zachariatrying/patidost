@@ -75,6 +75,26 @@ export const TASK_PACKS: TaskPack[] = [
       { title: 'Bugünden iyi giden tek bir şeyi yaz', energy: 20, coins: 18 },
     ],
   },
+  {
+    id: 'ev',
+    name: 'Ev & Düzen',
+    tagline: 'Gözünü yoran dağınıklığı 5 dakikada hafiflet',
+    tasks: [
+      { title: 'Masadaki sadece 3 eşyayı yerine koy', energy: 15, coins: 14 },
+      { title: 'Çöpleri veya boş bardakları mutfağa götür', energy: 15, coins: 12 },
+      { title: 'Odanı 3 dakika havalandır', energy: 15, coins: 12 },
+    ],
+  },
+  {
+    id: 'sosyal',
+    name: 'Nazik Bağlantı',
+    tagline: 'Kendini zorlamadan sevdiklerinle küçük bir bağ kur',
+    tasks: [
+      { title: 'Sevdiğin birine kısa bir "nasılsın?" mesajı at', energy: 20, coins: 18 },
+      { title: 'Kendine nazik bir cümle kur ve gülümse', energy: 15, coins: 14 },
+      { title: 'Sevdiğin bir şarkıyı açıp 2 dakika dinle', energy: 15, coins: 14 },
+    ],
+  },
 ];
 
 export const INITIAL_TASKS: MicroTask[] = [
@@ -211,6 +231,43 @@ export const COSMETIC_ITEMS: CosmeticItem[] = [
     slot: 'room',
     roomId: 'garden',
     price: 70,
+  },
+  {
+    id: 'room-bosphorus',
+    name: 'Boğaz Kıyısı',
+    description: 'Mavi sular, martılar ve serin bir İstanbul esintisi.',
+    slot: 'room',
+    roomId: 'bosphorus',
+    price: 85,
+  },
+  {
+    id: 'room-night-sky',
+    name: 'Yıldızlı Balkon',
+    description: 'Gece dinginliği, hilal ve yıldızlar altında sakin odak.',
+    slot: 'room',
+    roomId: 'night_sky',
+    price: 90,
+  },
+  {
+    id: 'flower-crown',
+    name: 'Papatya Tacı',
+    description: 'Bahar enerjisi taşıyan sade papatya tacı.',
+    slot: 'head',
+    price: 45,
+  },
+  {
+    id: 'red-bandana',
+    name: 'Kırmızı Fular',
+    description: 'Keşif ruhlu dostlara yakışan sıcak fular.',
+    slot: 'neck',
+    price: 35,
+  },
+  {
+    id: 'coffee-lokum',
+    name: 'Türk Kahvesi & Lokum',
+    description: 'Kırk yıllık hatırı olan köpüklü mola arkadaşı.',
+    slot: 'desk',
+    price: 55,
   },
 ];
 

@@ -58,6 +58,8 @@ export function PetStage({
     desk: { sky: '#E5ECF4', wall: '#F5EFE6', floor: '#DFCBB2', label: 'Çalışma Odası' },
     rainy: { sky: '#CBD7E3', wall: '#EBE7E1', floor: '#D5CBBF', label: 'Yağmurlu Pencere' },
     garden: { sky: '#DFF1F6', wall: '#EAF4E4', floor: '#CFE2C2', label: 'Bahçe Pikniği' },
+    bosphorus: { sky: '#CFE9F7', wall: '#F5EFE6', floor: '#DFCBB2', label: 'Boğaz Kıyısı' },
+    night_sky: { sky: '#1E293B', wall: '#2B213A', floor: '#46374E', label: 'Yıldızlı Balkon' },
   };
 
   const palette = roomBgMap[room];
@@ -170,6 +172,24 @@ export function PetStage({
                     </g>
                   </>
                 )}
+                {room === 'bosphorus' && (
+                  <>
+                    <path d="M210 112 Q240 105 268 112 Q296 119 326 112 L326 134 L210 134 Z" fill="#60A5FA" opacity="0.6" />
+                    <path d="M222 108 L242 84 L294 84 L314 108" fill="none" stroke="#94A3B8" strokeWidth="2.5" />
+                    <line x1="242" y1="78" x2="242" y2="112" stroke="#64748B" strokeWidth="3" />
+                    <line x1="294" y1="78" x2="294" y2="112" stroke="#64748B" strokeWidth="3" />
+                  </>
+                )}
+                {room === 'night_sky' && (
+                  <>
+                    <circle cx="298" cy="54" r="13" fill="#FDE68A" />
+                    <circle cx="304" cy="50" r="11" fill="#1E293B" />
+                    <circle cx="232" cy="46" r="2" fill="#FEF9C3" />
+                    <circle cx="256" cy="64" r="1.8" fill="#FEF9C3" />
+                    <circle cx="274" cy="42" r="2.2" fill="#FEF9C3" />
+                    <circle cx="244" cy="96" r="1.5" fill="#FEF9C3" />
+                  </>
+                )}
                 <line x1="268" y1="24" x2="268" y2="136" stroke="#D9C8B6" strokeWidth="3.5" />
                 <line x1="208" y1="80" x2="328" y2="80" stroke="#D9C8B6" strokeWidth="3.5" />
 
@@ -205,6 +225,15 @@ export function PetStage({
                 <rect x="24" y="34" width="6" height="32" rx="3" fill="#6B5849" />
                 <ellipse cx="27" cy="66" rx="16" ry="5" fill="#2B2118" />
                 <path d="M12 36 L42 36 L35 14 L19 14 Z" fill="#F4C76B" stroke="#2B2118" strokeWidth="2" strokeLinejoin="round" />
+              </g>
+            )}
+
+            {equipped.desk === 'coffee-lokum' && (
+              <g transform="translate(256, 162)">
+                <ellipse cx="24" cy="42" rx="22" ry="5.5" fill="#E8DDD0" stroke="#2B2118" strokeWidth="1.8" />
+                <path d="M14 24 L30 24 L27 40 L17 40 Z" fill="#FFFFFF" stroke="#2B2118" strokeWidth="2" strokeLinejoin="round" />
+                <ellipse cx="22" cy="24" rx="8" ry="2.5" fill="#5C3A21" stroke="#2B2118" strokeWidth="1.6" />
+                <rect x="34" y="33" width="8" height="8" rx="1.5" fill="#F472B6" stroke="#2B2118" strokeWidth="1.6" />
               </g>
             )}
 
@@ -290,7 +319,7 @@ export function PetStage({
                   <polygon points="161,123 169,123 165,128" fill="#D45D3A" />
                   <path d="M158 131 Q165 137 172 131" fill="none" stroke="#2B2118" strokeWidth="2.2" strokeLinecap="round" />
                 </g>
-              ) : (
+              ) : species === 'bird' ? (
                 /* Pıtır — Cozy Round Songbird */
                 <g>
                   {/* Feet */}
@@ -329,9 +358,77 @@ export function PetStage({
                   {/* Beak */}
                   <polygon points="158,122 172,122 165,132" fill="#E89D45" stroke="#2B2118" strokeWidth="2" strokeLinejoin="round" />
                 </g>
+              ) : species === 'dog' ? (
+                <g>
+                  {/* Wagging Tail */}
+                  <path d="M204 176 Q234 162 226 142" fill="none" stroke="#C88A4B" strokeWidth="10" strokeLinecap="round" className="animate-tail" />
+                  {/* Body */}
+                  <ellipse cx="165" cy="170" rx="44" ry="34" fill="#E8B87D" stroke="#2B2118" strokeWidth="2.8" />
+                  <ellipse cx="165" cy="178" rx="26" ry="22" fill="#FFF2DF" />
+                  {/* Floppy Ears */}
+                  <ellipse cx="116" cy="118" rx="13" ry="24" transform="rotate(14 116 118)" fill="#A96A38" stroke="#2B2118" strokeWidth="2.6" />
+                  <ellipse cx="214" cy="118" rx="13" ry="24" transform="rotate(-14 214 118)" fill="#A96A38" stroke="#2B2118" strokeWidth="2.6" />
+                  {/* Head */}
+                  <circle cx="165" cy="116" r="40" fill="#E8B87D" stroke="#2B2118" strokeWidth="2.8" />
+                  <ellipse cx="165" cy="129" rx="22" ry="15" fill="#FFF2DF" />
+                  <circle cx="148" cy="112" r="4.8" fill="#2B2118" />
+                  <circle cx="182" cy="112" r="4.8" fill="#2B2118" />
+                  <ellipse cx="165" cy="123" rx="6" ry="4" fill="#2B2118" />
+                  <path d="M159 130 Q165 136 171 130" fill="none" stroke="#2B2118" strokeWidth="2.4" strokeLinecap="round" />
+                  <ellipse cx="137" cy="125" rx="6" ry="3.5" fill="#E68B78" opacity="0.45" />
+                  <ellipse cx="193" cy="125" rx="6" ry="3.5" fill="#E68B78" opacity="0.45" />
+                  <ellipse cx="145" cy="198" rx="10" ry="7" fill="#FFF2DF" stroke="#2B2118" strokeWidth="2.4" />
+                  <ellipse cx="185" cy="198" rx="10" ry="7" fill="#FFF2DF" stroke="#2B2118" strokeWidth="2.4" />
+                </g>
+              ) : species === 'fox' ? (
+                <g>
+                  {/* Fluffy Tail */}
+                  <path d="M202 182 Q244 176 238 142 Q226 134 212 152 Z" fill="#D96B27" stroke="#2B2118" strokeWidth="2.5" className="animate-tail" />
+                  <circle cx="236" cy="144" r="8" fill="#FFF9F2" />
+                  {/* Body */}
+                  <ellipse cx="165" cy="170" rx="42" ry="33" fill="#D96B27" stroke="#2B2118" strokeWidth="2.8" />
+                  <ellipse cx="165" cy="176" rx="24" ry="22" fill="#FFF9F2" />
+                  {/* Pointy Ears */}
+                  <polygon points="124,104 132,66 154,94" fill="#D96B27" stroke="#2B2118" strokeWidth="2.6" strokeLinejoin="round" />
+                  <polygon points="206,104 198,66 176,94" fill="#D96B27" stroke="#2B2118" strokeWidth="2.6" strokeLinejoin="round" />
+                  {/* Head */}
+                  <ellipse cx="165" cy="116" rx="42" ry="36" fill="#D96B27" stroke="#2B2118" strokeWidth="2.8" />
+                  <path d="M124 122 Q165 104 206 122 Q196 148 165 150 Q134 148 124 122 Z" fill="#FFF9F2" />
+                  <circle cx="148" cy="112" r="4.5" fill="#2B2118" />
+                  <circle cx="182" cy="112" r="4.5" fill="#2B2118" />
+                  <circle cx="165" cy="126" r="4.5" fill="#2B2118" />
+                  <path d="M159 133 Q165 138 171 133" fill="none" stroke="#2B2118" strokeWidth="2.2" strokeLinecap="round" />
+                  <ellipse cx="145" cy="198" rx="9" ry="6.5" fill="#2B2118" />
+                  <ellipse cx="185" cy="198" rx="9" ry="6.5" fill="#2B2118" />
+                </g>
+              ) : (
+                <g>
+                  {/* Bunny Ears */}
+                  <ellipse cx="145" cy="64" rx="11" ry="30" transform="rotate(-8 145 64)" fill="#F9EFE6" stroke="#2B2118" strokeWidth="2.6" />
+                  <ellipse cx="145" cy="66" rx="5" ry="20" transform="rotate(-8 145 66)" fill="#F3B8B2" />
+                  <ellipse cx="185" cy="64" rx="11" ry="30" transform="rotate(8 185 64)" fill="#F9EFE6" stroke="#2B2118" strokeWidth="2.6" />
+                  <ellipse cx="185" cy="66" rx="5" ry="20" transform="rotate(8 185 66)" fill="#F3B8B2" />
+                  {/* Body */}
+                  <ellipse cx="165" cy="172" rx="42" ry="32" fill="#F9EFE6" stroke="#2B2118" strokeWidth="2.8" />
+                  {/* Head */}
+                  <circle cx="165" cy="118" r="39" fill="#F9EFE6" stroke="#2B2118" strokeWidth="2.8" />
+                  <circle cx="148" cy="114" r="4.6" fill="#2B2118" />
+                  <circle cx="182" cy="114" r="4.6" fill="#2B2118" />
+                  <ellipse cx="165" cy="124" rx="4.5" ry="3" fill="#E68B78" />
+                  <path d="M160 130 Q165 135 170 130" fill="none" stroke="#2B2118" strokeWidth="2.2" strokeLinecap="round" />
+                  <ellipse cx="137" cy="126" rx="6" ry="3.5" fill="#F3B8B2" opacity="0.65" />
+                  <ellipse cx="193" cy="126" rx="6" ry="3.5" fill="#F3B8B2" opacity="0.65" />
+                  <ellipse cx="146" cy="198" rx="11" ry="7" fill="#FFF9F2" stroke="#2B2118" strokeWidth="2.4" />
+                  <ellipse cx="184" cy="198" rx="11" ry="7" fill="#FFF9F2" stroke="#2B2118" strokeWidth="2.4" />
+                </g>
               )}
 
               {/* Neck Accessories */}
+              {equipped.neck === 'red-bandana' && (
+                <g>
+                  <path d="M132 146 L198 146 L165 174 Z" fill="#DC2626" stroke="#2B2118" strokeWidth="2.2" strokeLinejoin="round" />
+                </g>
+              )}
               {equipped.neck === 'scarf' && (
                 <g>
                   <rect x="128" y="144" width="74" height="14" rx="7" fill="#D45D3A" stroke="#2B2118" strokeWidth="2.2" />
@@ -366,6 +463,16 @@ export function PetStage({
                   <path d="M118 112 Q118 68 165 68 Q212 68 212 112" fill="none" stroke="#2B2118" strokeWidth="4.5" strokeLinecap="round" />
                   <rect x="109" y="102" width="14" height="28" rx="6" fill="#D45D3A" stroke="#2B2118" strokeWidth="2.2" />
                   <rect x="207" y="102" width="14" height="28" rx="6" fill="#D45D3A" stroke="#2B2118" strokeWidth="2.2" />
+                </g>
+              )}
+              {equipped.head === 'flower-crown' && (
+                <g transform="translate(165, 82)">
+                  {[-24, 0, 24].map((dx) => (
+                    <g key={dx} transform={`translate(${dx}, 0)`}>
+                      <circle cx="0" cy="0" r="8" fill="#FFFFFF" stroke="#2B2118" strokeWidth="1.6" />
+                      <circle cx="0" cy="0" r="3.5" fill="#F59E0B" />
+                    </g>
+                  ))}
                 </g>
               )}
 

@@ -1,8 +1,8 @@
-export type PetSpecies = 'cat' | 'bird';
+export type PetSpecies = 'cat' | 'bird' | 'dog' | 'fox' | 'bunny';
 
 export type PetMood = 'calm' | 'happy' | 'studying' | 'resting' | 'celebrating';
 
-export type RoomId = 'kadikoy' | 'desk' | 'rainy' | 'garden';
+export type RoomId = 'kadikoy' | 'desk' | 'rainy' | 'garden' | 'bosphorus' | 'night_sky';
 
 export type AccessorySlot = 'head' | 'neck' | 'desk';
 
