@@ -764,7 +764,10 @@ export default function App() {
 
             <p className="text-xs text-[#6B5849] leading-relaxed">
               PatiDost sıfır reklam ve sıfır üçüncü parti takip ilkesiyle çalışır. Tüm görevlerin, nefes
-              seansların ve ruh hali günlüklerin yalnızca cihazında saklanır.
+              seansların ve ruh hali günlüklerin yalnızca cihazında saklanır.{' '}
+              <a href="./privacy.html" className="underline font-bold text-[#366B51]">
+                Gizlilik &amp; KVKK Politikası
+              </a>
             </p>
 
             <div className="grid grid-cols-2 gap-2.5">
