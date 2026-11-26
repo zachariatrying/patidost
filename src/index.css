@@ -14,8 +14,8 @@
   --accent-terracotta: #d45d3a;
   --accent-sage: #366b51;
   --accent-amber: #b7791f;
-  --font-display: "Outfit", system-ui, -apple-system, sans-serif;
-  --font-body: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-display: "Fredoka", system-ui, -apple-system, sans-serif;
+  --font-body: "Nunito", system-ui, -apple-system, sans-serif;
 }
 
 body {

@@ -384,9 +384,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-[#EDE3D7] bg-[#FFF9F2]/90 backdrop-blur-md">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      {/* Floating Cozy Clay Pill Header */}
+      <div className="sticky top-3 z-30 px-4">
+        <header className="mx-auto max-w-5xl rounded-full border-2 border-[#E5D5C5] bg-[#FFFDF9]/95 backdrop-blur-md px-4 sm:px-5 h-14 flex items-center justify-between gap-3 shadow-[0_6px_0_#EADFD3]">
           <div className="flex items-center gap-2.5">
             <img src={`${import.meta.env.BASE_URL}store-assets/patidost_icon.png`} alt="PatiDost" className="w-8 h-8 rounded-lg object-cover" />
             <div>
@@ -438,8 +438,8 @@ export default function App() {
               {state.soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
             </button>
           </div>
-        </div>
-      </header>
+        </header>
+      </div>
 
       {/* Main Responsive Layout */}
       <main className="flex-1 mx-auto w-full max-w-6xl px-4 sm:px-6 py-6 pb-24 lg:pb-10">
@@ -512,7 +512,7 @@ export default function App() {
                         : 'bg-[#FFF9F2] text-[#6B5849] border border-[#E8DDD0]'
                     }`}
                   >
-                    {state.restDayActive ? 'Dinlenme Günü Aktif 🌿' : 'Rutin Akışı'}
+                    {state.restDayActive ? 'Dinlenme Günü Aktif' : 'Rutin Akışı'}
                   </span>
                 </div>
                 <div className="grid grid-cols-3 gap-2.5 text-center">
