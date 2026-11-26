@@ -155,6 +155,35 @@ export default function App() {
     flashMood('happy', 2200);
   };
 
+  const handleFeedPet = () => {
+    if (state.coins < 5) return;
+    playSoftChime('complete', state.soundEnabled);
+    setState((prev) => ({
+      ...prev,
+      coins: prev.coins - 5,
+      xp: prev.xp + 12,
+      todayEnergy: Math.min(prev.energyGoal, prev.todayEnergy + 10),
+    }));
+    flashMood('celebrating', 2000);
+    setQuote(`${state.petName} mamasını afiyetle yedi! (+12 XP)`);
+  };
+
+  const handleStarCatch = () => {
+    playSoftChime('tap', state.soundEnabled);
+    setState((prev) => ({
+      ...prev,
+      coins: prev.coins + 3,
+      xp: prev.xp + 4,
+    }));
+  };
+
+  const handleCycleRoom = () => {
+    const rooms: Array<AppState['activeRoom']> = ['kadikoy', 'desk', 'rainy', 'garden', 'bosphorus', 'night_sky'];
+    const idx = rooms.indexOf(state.activeRoom);
+    const next = rooms[(idx + 1) % rooms.length];
+    setState((prev) => ({ ...prev, activeRoom: next }));
+  };
+
   const handleToggleTask = (id: string) => {
     setState((prev) => {
       const target = prev.tasks.find((t) => t.id === id);
@@ -451,6 +480,7 @@ export default function App() {
               species={state.species}
               mood={activeMood}
               xp={state.xp}
+              coins={state.coins}
               todayEnergy={state.todayEnergy}
               energyGoal={state.energyGoal}
               room={state.activeRoom}
@@ -458,6 +488,9 @@ export default function App() {
               quote={quote}
               restDayActive={state.restDayActive}
               onPetClick={handlePetClick}
+              onFeedPet={handleFeedPet}
+              onStarCatch={handleStarCatch}
+              onCycleRoom={handleCycleRoom}
               onOpenCustomize={() => setCustomizeOpen(true)}
               onOpenWardrobe={() => setWardrobeOpen(true)}
               onToggleRestDay={handleToggleRestDay}

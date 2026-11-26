@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Heart, Sparkles, SlidersHorizontal, Moon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Heart, Sparkles, SlidersHorizontal, Moon, Star, Utensils, Sun } from 'lucide-react';
 import type { PetMood, PetSpecies, RoomId } from '../types';
 import { getGrowthStage } from '../data/catalog';
 
@@ -8,6 +8,7 @@ interface PetStageProps {
   species: PetSpecies;
   mood: PetMood;
   xp: number;
+  coins: number;
   todayEnergy: number;
   energyGoal: number;
   room: RoomId;
@@ -19,6 +20,9 @@ interface PetStageProps {
   quote: string;
   restDayActive: boolean;
   onPetClick: () => void;
+  onFeedPet: () => void;
+  onStarCatch: () => void;
+  onCycleRoom: () => void;
   onOpenCustomize: () => void;
   onOpenWardrobe: () => void;
   onToggleRestDay: () => void;
@@ -29,6 +33,7 @@ export function PetStage({
   species,
   mood,
   xp,
+  coins,
   todayEnergy,
   energyGoal,
   room,
@@ -36,13 +41,44 @@ export function PetStage({
   quote,
   restDayActive,
   onPetClick,
+  onFeedPet,
+  onStarCatch,
+  onCycleRoom,
   onOpenCustomize,
   onOpenWardrobe,
   onToggleRestDay,
 }: PetStageProps) {
   const [hearts, setHearts] = useState<number[]>([]);
+  const [gameActive, setGameActive] = useState(false);
+  const [gameSeconds, setGameSeconds] = useState(15);
+  const [gameScore, setGameScore] = useState(0);
+  const [starPos, setStarPos] = useState<{ x: number; y: number }>({ x: 50, y: 42 });
+
   const { stage, level, progressPct } = getGrowthStage(xp);
   const energyPct = Math.min(100, Math.round((todayEnergy / Math.max(1, energyGoal)) * 100));
+
+  useEffect(() => {
+    if (!gameActive) return;
+    if (gameSeconds <= 0) {
+      setGameActive(false);
+      return;
+    }
+    const timer = window.setTimeout(() => setGameSeconds((s) => s - 1), 1000);
+    return () => window.clearTimeout(timer);
+  }, [gameActive, gameSeconds]);
+
+  const startStarGame = () => {
+    setGameScore(0);
+    setGameSeconds(15);
+    setStarPos({ x: 25 + Math.random() * 50, y: 25 + Math.random() * 45 });
+    setGameActive(true);
+  };
+
+  const catchStar = () => {
+    setGameScore((s) => s + 1);
+    setStarPos({ x: 18 + Math.random() * 64, y: 20 + Math.random() * 52 });
+    onStarCatch();
+  };
 
   const handlePet = () => {
     const id = Date.now() + Math.random();
@@ -500,6 +536,62 @@ export function PetStage({
             Okşamak için dokun
           </span>
         </button>
+
+        {/* Interactive Mini-Game Star Overlay */}
+        {gameActive && (
+          <div className="absolute inset-x-4 top-3 bottom-2 rounded-2xl bg-[#1E1B2E]/25 backdrop-blur-[1px] z-20 flex flex-col justify-between p-3 pointer-events-auto">
+            <div className="flex items-center justify-between bg-white/95 rounded-full px-3 py-1 text-xs font-extrabold text-[#2B2118] shadow-sm">
+              <span>Yıldız Yakala! · {gameSeconds} sn</span>
+              <span className="text-[#D45D3A]">Skor: {gameScore} (+{gameScore * 3} Pati)</span>
+            </div>
+            <button
+              type="button"
+              onClick={catchStar}
+              aria-label="Yıldızı yakala"
+              style={{ left: `${starPos.x}%`, top: `${starPos.y}%` }}
+              className="absolute -translate-x-1/2 -translate-y-1/2 p-2.5 rounded-full bg-[#FFE600] border-2 border-[#2B2118] shadow-[0_4px_0_#2B2118] active:translate-y-[-46%] cursor-pointer animate-bounce"
+            >
+              <Star className="w-6 h-6 text-[#D45D3A] fill-[#D45D3A]" />
+            </button>
+          </div>
+        )}
+
+        {/* Tactile Game Action Dock */}
+        <div className="mt-3 grid grid-cols-4 gap-2">
+          <button
+            type="button"
+            onClick={handlePet}
+            className="rounded-2xl border-2 border-[#E8DDD0] bg-[#FFFDF9] py-2 px-2 text-xs font-extrabold text-[#2B2118] shadow-[0_4px_0_#E8DDD0] active:translate-y-[2px] flex flex-col items-center gap-1 cursor-pointer"
+          >
+            <Heart className="w-4 h-4 text-[#D45D3A]" />
+            <span>Okşa</span>
+          </button>
+          <button
+            type="button"
+            onClick={onFeedPet}
+            disabled={coins < 5}
+            className="rounded-2xl border-2 border-[#EED7A7] bg-[#FDF4E3] py-2 px-2 text-xs font-extrabold text-[#9B6515] shadow-[0_4px_0_#E6C98F] active:translate-y-[2px] disabled:opacity-50 flex flex-col items-center gap-1 cursor-pointer"
+          >
+            <Utensils className="w-4 h-4" />
+            <span>Besle (5)</span>
+          </button>
+          <button
+            type="button"
+            onClick={startStarGame}
+            className="rounded-2xl border-2 border-[#C7E2D4] bg-[#EAF5EF] py-2 px-2 text-xs font-extrabold text-[#214B36] shadow-[0_4px_0_#B7D6C5] active:translate-y-[2px] flex flex-col items-center gap-1 cursor-pointer"
+          >
+            <Star className="w-4 h-4 text-[#D97706]" />
+            <span>{gameActive ? `${gameSeconds}s` : 'Mini Oyun'}</span>
+          </button>
+          <button
+            type="button"
+            onClick={onCycleRoom}
+            className="rounded-2xl border-2 border-[#E8DDD0] bg-[#FFFDF9] py-2 px-2 text-xs font-extrabold text-[#6B5849] shadow-[0_4px_0_#E8DDD0] active:translate-y-[2px] flex flex-col items-center gap-1 cursor-pointer"
+          >
+            <Sun className="w-4 h-4 text-[#D45D3A]" />
+            <span>Oda Değiş</span>
+          </button>
+        </div>
 
         {/* Warm Companion Speech Bubble */}
         <div className="mt-3 rounded-2xl bg-[#FFF9F2] border border-[#EDE3D7] px-4 py-3 text-sm leading-relaxed text-[#2B2118]">
