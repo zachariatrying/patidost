@@ -320,7 +320,7 @@ export function PetStage({
                   <path d="M201 90 L204 70 L186 82 Z" fill="#F4B6A4" />
                   {/* Head */}
                   <ellipse cx="165" cy="116" rx="46" ry="38" fill="#E8A267" stroke="#2B2118" strokeWidth="2.8" />
-                  {/* Tabby Stripes */}
+                  {/* Tekir Deseni */}
                   <path d="M156 80 L158 93 M165 79 L165 95 M174 80 L172 93" stroke="#B66A34" strokeWidth="3.2" strokeLinecap="round" />
                   {/* Cheeks */}
                   <ellipse cx="136" cy="126" rx="7" ry="4.5" fill="#E88B7A" opacity="0.6" />
