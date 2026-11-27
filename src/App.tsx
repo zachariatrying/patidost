@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
+import { GuideWidget } from './components/GuideWidget';
 import {
   Volume2,
   VolumeX,
@@ -825,6 +826,7 @@ export default function App() {
           </div>
         </div>
       )}
+      <GuideWidget />
     </div>
   );
 }
